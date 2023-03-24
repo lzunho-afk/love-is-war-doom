@@ -80,6 +80,17 @@ class RayCasting:
                                   math.floor(settings.HEIGHT / 9) * oy),
                                  (math.floor(settings.WIDTH / 16) * ox + math.floor(settings.WIDTH / 16) * depth * cos_a,
                                   math.floor(settings.HEIGHT / 9) * oy + math.floor(settings.HEIGHT / 9) * depth * sin_a), 2)
+                
+            # Projection
+            projection_height = settings.SCREEN_DIST / (depth + 0.0001)
+            
+            # Walls
+            pygame.draw.rect(self.game.screen, 'white',
+                             (ray * settings.SCALE,
+                              settings.HALF_HEIGHT - projection_height // 2,
+                              settings.SCALE,
+                              projection_height))
+            
             ray_angle += settings.DELTA_ANGLE
     
     def update(self):
