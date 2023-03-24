@@ -85,7 +85,8 @@ class RayCasting:
             projection_height = settings.SCREEN_DIST / (depth + 0.0001)
             
             # Walls
-            pygame.draw.rect(self.game.screen, 'white',
+            color = [255 / (1 + depth ** 5 * 0.00002)] * 3 # Distance Shadow
+            pygame.draw.rect(self.game.screen, color,
                              (ray * settings.SCALE,
                               settings.HALF_HEIGHT - projection_height // 2,
                               settings.SCALE,
