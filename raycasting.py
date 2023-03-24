@@ -73,6 +73,8 @@ class RayCasting:
             else:
                 depth = horizontal_depth
             
+            depth *= math.cos(self.game.player.angle - ray_angle)
+            
             # RayCasting debug lines
             if settings.RAYCASTING_DEBUG:
                 pygame.draw.line(self.game.screen, 'yellow', 
