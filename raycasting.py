@@ -123,10 +123,10 @@ class RayCasting:
             # RayCasting debug lines
             if settings.RAYCASTING_DEBUG:
                 pygame.draw.line(self.game.screen, 'yellow', 
-                                 (math.floor(settings.WIDTH / 16) * ox,
-                                  math.floor(settings.HEIGHT / 9) * oy),
-                                 (math.floor(settings.WIDTH / 16) * ox + math.floor(settings.WIDTH / 16) * depth * cos_a,
-                                  math.floor(settings.HEIGHT / 9) * oy + math.floor(settings.HEIGHT / 9) * depth * sin_a), 2)
+                                 (100 * ox,
+                                  100 * oy),
+                                 (100 * ox + 100 * depth * cos_a,
+                                  100 * oy + 100 * depth * sin_a), 2)
                 
             # Projection
             projection_height = settings.SCREEN_DIST / (depth + 0.0001)

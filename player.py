@@ -40,10 +40,10 @@ class Player:
             
         self.checkWallCollision(dx, dy)
         
-        if keys[pygame.K_LEFT]:
-            self.angle -= settings.PLAYER_ROT_SPEED * self.game.dt
-        if keys[pygame.K_RIGHT]:
-            self.angle += settings.PLAYER_ROT_SPEED * self.game.dt
+        # if keys[pygame.K_LEFT]:
+            # self.angle -= settings.PLAYER_ROT_SPEED * self.game.dt
+        # if keys[pygame.K_RIGHT]:
+            # self.angle += settings.PLAYER_ROT_SPEED * self.game.dt
         self.angle %= math.tau
         
     def checkWall(self, x, y):
@@ -63,11 +63,20 @@ class Player:
         #                 (self.x * math.floor(settings.WIDTH / 16) + settings.WIDTH * math.cos(self.angle), 
         #                  self.y * math.floor(settings.HEIGHT / 9) + settings.HEIGHT * math.sin(self.angle)), 2)
         pygame.draw.circle(self.game.screen, 'green', 
-                           (self.x * math.floor(settings.WIDTH / 16),
-                            self.y * math.floor(settings.HEIGHT / 9)), 15)
+                           (self.x * 100,
+                            self.y * 100), 15)
+    
+    def mouse_control(self):
+        mx, my = pygame.mouse.get_pos()
+        if mx < settings.MOUSE_BORDER_LEFT or mx > settings.MOUSE_BORDER_RIGHT:
+            pygame.mouse.set_pos([settings.HALF_WIDTH, settings.HALF_HEIGHT])
+        self.rel = pygame.mouse.get_rel()[0]
+        self.rel = max(-settings.MOUSE_MAX_REL, min(settings.MOUSE_MAX_REL, self.rel))
+        self.angle += self.rel * settings.MOUSE_SENSITIVITY * self.game.dt
     
     def update(self):
         self.movement()
+        self.mouse_control()
         
     @property 
     def pos(self):

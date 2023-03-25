@@ -19,6 +19,7 @@ import object_renderer
 class Game:
     def __init__(self):
         pygame.init()
+        pygame.mouse.set_visible(False)
         self.screen = pygame.display.set_mode(settings.RES, pygame.FULLSCREEN)
         self.clock = pygame.time.Clock()
         self.dt = 1
