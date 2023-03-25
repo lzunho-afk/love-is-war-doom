@@ -50,9 +50,10 @@ class Player:
         return (x, y) not in self.game.map.world_map
     
     def checkWallCollision(self, dx, dy):
-        if self.checkWall(int(self.x + dx), int(self.y)):
+        scale = settings.PLAYER_SIZE_SCALE / self.game.dt
+        if self.checkWall(int(self.x + dx * scale), int(self.y)):
             self.x += dx
-        if self.checkWall(int(self.x), int(self.y + dy)):
+        if self.checkWall(int(self.x), int(self.y + dy * scale)):
             self.y += dy
         
     def draw(self):
