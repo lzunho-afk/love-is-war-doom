@@ -15,6 +15,7 @@ import map
 import player
 import raycasting
 import object_renderer
+import sprite_object
 
 class Game:
     def __init__(self):
@@ -30,10 +31,12 @@ class Game:
         self.player = player.Player(self)
         self.object_renderer = object_renderer.ObjectRenderer(self)
         self.raycasting = raycasting.RayCasting(self)
+        self.static_sprite = sprite_object.SpriteObject(self)
     
     def update(self):
         self.player.update()
         self.raycasting.update()
+        self.static_sprite.update()
         pygame.display.flip()
         self.dt = self.clock.tick(settings.FPS)
         pygame.display.set_caption(f'{self.clock.get_fps() :.1f}')

@@ -7,4 +7,6 @@ parte do tempo explorando grandes *dungeons* em busca da vitória no amor
 
 ## Externo
 
-- [p0ss](https://opengameart.org/content/117-stone-wall-tilable-textures-in-8-themes): Algumas texturas utilizadas na fase de teste
+- Artworks
+    - [p0ss](https://opengameart.org/content/117-stone-wall-tilable-textures-in-8-themes): Algumas texturas utilizadas na fase de teste
+    - [Iamrenz](https://iamrenz.itch.io/real-heart): Realistic Heart Sprite

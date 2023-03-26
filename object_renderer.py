@@ -32,7 +32,7 @@ class ObjectRenderer:
                          (0, settings.HALF_HEIGHT, settings.WIDTH, settings.HEIGHT))
         
     def renderGameObjects(self):
-        objectsList = self.game.raycasting.objectsToRender
+        objectsList = sorted(self.game.raycasting.objectsToRender, key=lambda t: t[0], reverse=True)
         for depth, img, position in objectsList:
             self.screen.blit(img, position)
         
