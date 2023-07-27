@@ -3,7 +3,7 @@ import os
 
 proj_root = os.path.dirname(os.path.realpath(__file__))
 
-with open(proj_root + '/README.rst') as f:
+with open(proj_root + '/README.md') as f:
     readme = f.read()
 
 with open(proj_root + '/LICENSE') as f:

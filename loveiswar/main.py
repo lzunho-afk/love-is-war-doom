@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Mar 24 12:57:59 2023
-
-@author: lzunho-afk
-"""
+# Copyright (c) MIT
+# Lucas Zunho <lucaszunho17@gmail.com>
 
 import pygame
 import sys

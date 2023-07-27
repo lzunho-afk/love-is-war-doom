@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Mar 26 10:29:26 2023
-
-@author: lzunho-afk
-"""
+# Copyright (c) MIT
+# Lucas Zunho <lucaszunho17@gmail.com>
 
 import math
 import pygame 
