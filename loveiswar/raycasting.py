@@ -7,13 +7,35 @@ import math
 import settings
 
 class RayCasting:
+    """Implementação e projeção de raycasting no contexto do jogo.
+
+    Attributes:
+    	game (loveiswar.main.Game): Objeto `Game` do contexto em execução.
+        rayCastingResult (list): Lista com os valores de escala e textura para renderização e
+        	projeção das `rays`.
+        objectsToRender (list): Lista de obj. descrevendo as `rays` já prontas para renderização.
+        textures (pygame.Surface list): Lista das texturas de parede do jogo - refere-se à
+        	:py:class:`loveiswar.main.Game`.
+    """
     def __init__(self, game):
+        """Atribuição das variáveis do atual contexto do jogo e inicialização das listas
+        	para atribuição das `rays`.
+
+        Args:
+        	game (:obj:`loveiswar.game.Game`): Obj. `Game` em execução.
+        """
         self.game = game
         self.rayCastingResult = []
         self.objectsToRender = []
         self.textures = self.game.object_renderer.wallTextures
         
     def getObjectsToRender(self):
+        """Cria a lista de renderização de acordo com cada `ray` e sua respectiva textura.
+
+        O método verifica cada valor resultante do raycasting (:py:meth:`loveiswar.raycasting.Raycasting.rayCast`)
+        e ajusta a escala da textura sobre cada `ray` para definir a perspectiva correta
+        na tela, alocando-a na lista de renderização.
+        """
         self.objectsToRender = []
         for ray, values in enumerate(self.rayCastingResult):
             depth, projectionHeight, texture, offset = values
@@ -37,6 +59,7 @@ class RayCasting:
             self.objectsToRender.append((depth, wallColumn, wallPosition))
         
     def rayCast(self):
+        """Cálculo do `raycasting` para a projeção 3D."""
         self.rayCastingResult = []
         ox, oy = self.game.player.pos
         x_map, y_map = self.game.player.map_pos
@@ -68,7 +91,7 @@ class RayCasting:
                     horizontalTexture = self.game.map.world_map[tile_hor]
                     break
                 x_hor += dx
-                y_hor += dy                
+                y_hor += dy
                 horizontal_depth += delta_depth
             
             # Intersections with verticals
@@ -133,5 +156,6 @@ class RayCasting:
             ray_angle += settings.DELTA_ANGLE
     
     def update(self):
+        """Cálcula e atualiza a lista de renderização do `raycasting`."""
         self.rayCast()
         self.getObjectsToRender()

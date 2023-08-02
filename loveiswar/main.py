@@ -26,7 +26,7 @@ class Game:
     pygame (o jogo em si).
 
     Attributes:
-    	screen: Estrutura de controle do `display` do pygame.
+    	screen (:obj:`pygame.Surface`): Estrutura de controle do `display` do pygame.
         clock (:obj:`pygame.time.Clock`): Objeto utilizado para controle de tempo.
         dt (int): delta-time.
         map (:obj:`loveiswar.map.Map`): Controle e desenho do mapa.
@@ -41,9 +41,9 @@ class Game:
         """Inicialização do pygame e configurações básicas do contexto da janela.
 
         As definições de display feitas no construtor são orientadas pelo módulo
-        ``settings`` - configurações `RES` e `FULLSCREEN`. Todos os outros objetos
-        utilizados pela classe para controlar o contexto do jogo também utilizam
-        esse mesmo módulo para orientar suas definições.
+        :py:mod:`loveiswar.settings` - configurações `RES` e `FULLSCREEN`. Todos
+        os outros objetos utilizados pela classe para controlar o contexto do jogo
+        também utilizam esse mesmo módulo para orientar suas definições.
         """
         pygame.init()
         pygame.mouse.set_visible(False)
