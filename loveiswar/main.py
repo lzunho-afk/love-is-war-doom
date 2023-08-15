@@ -56,9 +56,9 @@ class Game:
         
         self.clock = pygame.time.Clock()
         self.dt = 1
-        self.newGame()
+        self.new_game()
         
-    def newGame(self):
+    def new_game(self):
         """Atribuição dos objetos auxiliares do jogo à classe.
 
         Os objetos com maior importância para o contexto do jogo são inicializados
@@ -96,7 +96,7 @@ class Game:
         #self.map.draw()
         #self.player.draw()
         
-    def checkEvents(self):
+    def check_events(self):
         """Verifica os eventos gerais do `display` e chama os métodos necessários. """
         for event in pygame.event.get():
             if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
@@ -107,7 +107,7 @@ class Game:
         """Loop principal do jogo. Roda as ações de atualização e renderização do
         	jogo até o evento de saída."""
         while True:
-            self.checkEvents()
+            self.check_events()
             self.update()
             self.draw()
 

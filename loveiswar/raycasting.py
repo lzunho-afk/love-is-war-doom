@@ -25,46 +25,46 @@ class RayCasting:
         	game (:obj:`loveiswar.game.Game`): Obj. `Game` em execução.
         """
         self.game = game
-        self.rayCastingResult = []
-        self.objectsToRender = []
-        self.textures = self.game.object_renderer.wallTextures
+        self.ray_casting_result = []
+        self.objects_to_render = []
+        self.textures = self.game.object_renderer.wall_textures
         
-    def getObjectsToRender(self):
+    def get_objects_to_render(self):
         """Cria a lista de renderização de acordo com cada `ray` e sua respectiva textura.
 
         O método verifica cada valor resultante do raycasting (:py:meth:`loveiswar.raycasting.Raycasting.rayCast`)
         e ajusta a escala da textura sobre cada `ray` para definir a perspectiva correta
         na tela, alocando-a na lista de renderização.
         """
-        self.objectsToRender = []
-        for ray, values in enumerate(self.rayCastingResult):
-            depth, projectionHeight, texture, offset = values
+        self.objects_to_render = []
+        for ray, values in enumerate(self.ray_casting_result):
+            depth, projection_height, texture, offset = values
             
-            if projectionHeight < settings.HEIGHT:
-                wallColumn = self.textures[texture].subsurface(
+            if projection_height < settings.HEIGHT:
+                wall_column = self.textures[texture].subsurface(
                     offset * (settings.TEXTURE_SIZE - settings.SCALE), 0, settings.SCALE, settings.TEXTURE_SIZE
                 )
-                wallColumn = pygame.transform.scale(wallColumn, (settings.SCALE, projectionHeight))
-                wallPosition = (ray * settings.SCALE, settings.HALF_HEIGHT - projectionHeight // 2)
+                wall_column = pygame.transform.scale(wall_column, (settings.SCALE, projection_height))
+                wall_position = (ray * settings.SCALE, settings.HALF_HEIGHT - projection_height // 2)
             else:
-                textureHeight = settings.TEXTURE_SIZE * settings.HEIGHT / projectionHeight
-                wallColumn = self.textures[texture].subsurface(
+                texture_height = settings.TEXTURE_SIZE * settings.HEIGHT / projection_height
+                wall_column = self.textures[texture].subsurface(
                     offset * (settings.TEXTURE_SIZE - settings.SCALE),
-                    settings.HALF_TEXTURE_SIZE - textureHeight // 2,
-                    settings.SCALE, textureHeight
+                    settings.HALF_TEXTURE_SIZE - texture_height // 2,
+                    settings.SCALE, texture_height
                 )
-                wallColumn = pygame.transform.scale(wallColumn, (settings.SCALE, settings.HEIGHT))
-                wallPosition = (ray * settings.SCALE, 0)
+                wall_column = pygame.transform.scale(wall_column, (settings.SCALE, settings.HEIGHT))
+                wall_position = (ray * settings.SCALE, 0)
                 
-            self.objectsToRender.append((depth, wallColumn, wallPosition))
+            self.objects_to_render.append((depth, wall_column, wall_position))
         
-    def rayCast(self):
+    def ray_cast(self):
         """Cálculo do `raycasting` para a projeção 3D."""
-        self.rayCastingResult = []
+        self.ray_casting_result = []
         ox, oy = self.game.player.pos
         x_map, y_map = self.game.player.map_pos
         
-        verticalTexture, horizontalTexture = 1, 1
+        vertical_texture, horizontal_texture = 1, 1
         
         ray_angle = self.game.player.angle - settings.HALF_FOV + 0.0001
         for ray in range(settings.NUM_RAYS):
@@ -88,7 +88,7 @@ class RayCasting:
             for i in range(settings.MAX_DEPTH):
                 tile_hor = int(x_hor), int(y_hor)
                 if tile_hor in self.game.map.world_map:
-                    horizontalTexture = self.game.map.world_map[tile_hor]
+                    horizontal_texture = self.game.map.world_map[tile_hor]
                     break
                 x_hor += dx
                 y_hor += dy
@@ -111,7 +111,7 @@ class RayCasting:
             for i in range(settings.MAX_DEPTH):
                 tile_vert = int(x_vert), int(y_vert)
                 if tile_vert in self.game.map.world_map:
-                    verticalTexture = self.game.map.world_map[tile_vert]
+                    vertical_texture = self.game.map.world_map[tile_vert]
                     break
                 x_vert += dx
                 y_vert += dy
@@ -120,7 +120,7 @@ class RayCasting:
             # Set Depth & Texture Offset
             if vertical_depth < horizontal_depth:
                 depth = vertical_depth
-                texture = verticalTexture
+                texture = vertical_texture
                 y_vert %= 1
                 
                 if cos_a > 0:
@@ -129,7 +129,7 @@ class RayCasting:
                     offset = (1 - y_vert)
             else:
                 depth = horizontal_depth
-                texture = horizontalTexture
+                texture = horizontal_texture
                 x_hor %= 1
                 
                 if sin_a > 0:
@@ -151,11 +151,11 @@ class RayCasting:
             projection_height = settings.SCREEN_DIST / (depth + 0.0001)
             
             # Defining RayCasting result
-            self.rayCastingResult.append((depth, projection_height, texture, offset))
+            self.ray_casting_result.append((depth, projection_height, texture, offset))
             
             ray_angle += settings.DELTA_ANGLE
     
     def update(self):
         """Cálcula e atualiza a lista de renderização do `raycasting`."""
-        self.rayCast()
-        self.getObjectsToRender()
+        self.ray_cast()
+        self.get_objects_to_render()

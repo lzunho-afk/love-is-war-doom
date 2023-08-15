@@ -58,7 +58,7 @@ class Player:
             dx += -speed_sin
             dy += speed_cos
             
-        self.checkWallCollision(dx, dy)
+        self.check_wall_collision(dx, dy)
         """Verificação de colisão com base no movimento prestes a ocorrer
         	sobre as escalas do jogo (:py:mod:`loveiswar.settings`)."""
         
@@ -68,7 +68,7 @@ class Player:
             # self.angle += settings.PLAYER_ROT_SPEED * self.game.dt
         self.angle %= math.tau
         
-    def checkWall(self, x, y):
+    def check_wall(self, x, y):
         """Verifica as coordenadas em relação ao mapa de renderização do jogo.
 
         Args:
@@ -81,7 +81,7 @@ class Player:
         """
         return (x, y) not in self.game.map.world_map
     
-    def checkWallCollision(self, dx, dy):
+    def check_wall_collision(self, dx, dy):
         """Verifica a colisão nas duas dimensões, considerando a escala e a posição
         	atual do player.
 
@@ -90,9 +90,9 @@ class Player:
             dy (int): Valor de variação da posição do player na linha 'Y' - vertical.
         """
         scale = settings.PLAYER_SIZE_SCALE / self.game.dt
-        if self.checkWall(int(self.x + dx * scale), int(self.y)):
+        if self.check_wall(int(self.x + dx * scale), int(self.y)):
             self.x += dx
-        if self.checkWall(int(self.x), int(self.y + dy * scale)):
+        if self.check_wall(int(self.x), int(self.y + dy * scale)):
             self.y += dy
         
     def draw(self):

@@ -20,25 +20,25 @@ class SpriteObject:
         self.theta = 0
         self.screen_x = 0
         self.distance = 1
-        self.normalDistance = 1
-        self.spriteHalfWidth = 0
+        self.normal_distance = 1
+        self.sprite_half_width = 0
         self.SPRITE_SCALE = scale
         self.SPRITE_HEIGHT_SHIFT = shift
         
-    def getSpriteProjection(self):
-        projection = settings.SCREEN_DIST / self.normalDistance * self.SPRITE_SCALE
-        projectionWidth = projection * self.IMAGE_RATIO
-        projectionHeight = projection 
+    def get_sprite_projection(self):
+        projection = settings.SCREEN_DIST / self.normal_distance * self.SPRITE_SCALE
+        projection_width = projection * self.IMAGE_RATIO
+        projection_height = projection 
         
-        image = pygame.transform.scale(self.image, (projectionWidth, projectionHeight))
+        image = pygame.transform.scale(self.image, (projection_width, projection_height))
         
-        self.spriteHalfWidth = projectionWidth // 2
-        heightShift = projectionHeight * self.SPRITE_HEIGHT_SHIFT
-        pos = self.screen_x - self.spriteHalfWidth, settings.HALF_HEIGHT - projectionHeight // 2 + heightShift
+        self.sprite_half_width = projection_width // 2
+        height_shift = projection_height * self.SPRITE_HEIGHT_SHIFT
+        pos = self.screen_x - self.sprite_half_width, settings.HALF_HEIGHT - projection_height // 2 + height_shift
         
-        self.game.raycasting.objectsToRender.append((self.normalDistance, image, pos))
+        self.game.raycasting.objects_to_render.append((self.normal_distance, image, pos))
 
-    def getSprite(self):
+    def get_sprite(self):
         dx = self.x - self.player.x
         dy = self.y - self.player.y
         self.dx, self.dy = dx, dy
@@ -52,9 +52,9 @@ class SpriteObject:
         self.screen_x = (settings.HALF_NUM_RAYS + delta_rays) * settings.SCALE
         
         self.distance = math.hypot(dx, dy)
-        self.normalDistance = self.distance * math.cos(delta)
-        if -self.IMAGE_HALF_WIDTH < self.screen_x < (settings.WIDTH + self.IMAGE_HALF_WIDTH) and self.normalDistance > 0.5:
-            self.getSpriteProjection()
+        self.normal_distance = self.distance * math.cos(delta)
+        if -self.IMAGE_HALF_WIDTH < self.screen_x < (settings.WIDTH + self.IMAGE_HALF_WIDTH) and self.normal_distance > 0.5:
+            self.get_sprite_projection()
             
     def update(self):
-        self.getSprite()
+        self.get_sprite()

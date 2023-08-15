@@ -31,25 +31,25 @@ class ObjectRenderer:
         """
         self.game = game
         self.screen = game.screen
-        self.wallTextures = self.loadWallTextures()
+        self.wall_textures = self.load_wall_textures()
 
-        self.skyImage = self.getTexture('assets/textures/sky.png',
+        self.sky_image = self.get_texture('assets/textures/sky.png',
             (settings.WIDTH, settings.HALF_HEIGHT))
         """Surface: Escalonagem da textura de céu para uso útil (1/2 da altura)."""
         
-        self.skyOffset = 0
+        self.sky_offset = 0
         
     def draw(self):
         """Chama os métodos de renderização do plano de fundo e os de objetos com
         	renderização específica. """
-        self.drawBackground()
-        self.renderGameObjects()
+        self.draw_background()
+        self.render_game_objects()
         
-    def drawBackground(self):
+    def draw_background(self):
         """Renderiza o plano de fundo (céu) e o chão. """
-        self.skyOffset = (self.skyOffset + 4.5 * self.game.player.rel) % settings.WIDTH
-        self.screen.blit(self.skyImage, (-self.skyOffset, 0))
-        self.screen.blit(self.skyImage, (-self.skyOffset + settings.WIDTH, 0))
+        self.sky_offset = (self.sky_offset + 4.5 * self.game.player.rel) % settings.WIDTH
+        self.screen.blit(self.sky_image, (-self.sky_offset, 0))
+        self.screen.blit(self.sky_image, (-self.sky_offset + settings.WIDTH, 0))
     
         # Floor
         pygame.draw.rect(self.screen, settings.FLOOR_COLOR, 
@@ -57,18 +57,18 @@ class ObjectRenderer:
         """:obj:`pygame.Rect`: renderização do chão do jogo com uma cor plana
         	(:py:data:`loveiswar.settings.FLOOR_COLOR`). """
         
-    def renderGameObjects(self):
+    def render_game_objects(self):
         """Renderiza os objetos específicos da lista de renderização do jogo.
 
         Nesse método que ocorre a renderização das rays através da lista de objetos
         do objeto de raycasting (:py:class:`loveiswar.raycasting.RayCasting`) da classe Game.
         """
-        objectsList = sorted(self.game.raycasting.objectsToRender, key=lambda t: t[0], reverse=True)
-        for depth, img, position in objectsList:
+        objects_list = sorted(self.game.raycasting.objects_to_render, key=lambda t: t[0], reverse=True)
+        for depth, img, position in objects_list:
             self.screen.blit(img, position)
         
     @staticmethod 
-    def getTexture(path, res=settings.TEXTURE_TUPLE):
+    def get_texture(path, res=settings.TEXTURE_TUPLE):
         """Carrega uma imagem em alpha de um arquivo e o escalona sobre a resolução usada.
 
         Args:
@@ -82,7 +82,7 @@ class ObjectRenderer:
         texture = pygame.image.load(path).convert_alpha()
         return pygame.transform.scale(texture, res)
         
-    def loadWallTextures(self):
+    def load_wall_textures(self):
         """Utiliza o módulo estático de carregamento de texturas para carregar as texturas
         	padrão de renderização do mapa.
 
@@ -90,9 +90,9 @@ class ObjectRenderer:
         	`pygame.Surface` list: Lista com os objetos carregados com index iniciado em '1'.
         """
         return {
-            1: self.getTexture('assets/textures/1.png'),
-            2: self.getTexture('assets/textures/2.png'),
-            3: self.getTexture('assets/textures/3.png'),
-            4: self.getTexture('assets/textures/4.png'),
-            5: self.getTexture('assets/textures/5.png')
+            1: self.get_texture('assets/textures/1.png'),
+            2: self.get_texture('assets/textures/2.png'),
+            3: self.get_texture('assets/textures/3.png'),
+            4: self.get_texture('assets/textures/4.png'),
+            5: self.get_texture('assets/textures/5.png')
         }
