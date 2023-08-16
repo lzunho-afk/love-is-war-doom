@@ -3,7 +3,7 @@
 # Lucas Zunho <lucaszunho17@gmail.com>
 
 import pygame
-import settings 
+import settings
 
 class ObjectRenderer:
     """Renderiza filas de renderização e importa texturas necessárias.

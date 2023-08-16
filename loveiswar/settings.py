@@ -1,6 +1,15 @@
 #!/usr/bin/env python3
 # Copyright (c) MIT
 # Lucas Zunho <lucaszunho17@gmail.com>
+""" Configurações de inicialização e manutenção do jogo/engine.
+
+Todas as variáveis globais desse arquivo representam configurações
+que serão utilizadas no contexto da engine. Elas podem ser alteradas
+por via externa (arquivos de configuração yaml) ou através de 
+alterações devidas pelo próprio contexto da engine (via interna).
+
+    .. todo:: Classe de manipulação da configuração por yaml.
+"""
 
 import math
 

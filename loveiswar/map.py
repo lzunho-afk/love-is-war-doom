@@ -16,7 +16,10 @@ mini_map = [
     [1, _, _, 1, _, _, _, 1, _, _, _, _, _, _, _, 3],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3],
 ]
-"""lista de inteiros: Define o tamanho do mapa e a localização das texturas. """
+"""lista de inteiros: Define o tamanho do mapa e a localização das texturas. 
+
+    :meta hide-value:
+"""
 
 class Map:
     """Representação de mapa do jogo com sua interface de renderização.

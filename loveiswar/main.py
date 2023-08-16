@@ -3,7 +3,7 @@
 # Lucas Zunho <lucaszunho17@gmail.com>
 """Inicialização e representação do contexto do jogo.
 
-Esse módulo apresenta a classe :py:class:`loveiswar.Game` e a sua inicialização
+Esse módulo apresenta a classe :py:class:`loveiswar.main.Game` e a sua inicialização
 no caso de ocorrer a execução do arquivo.
 """
 import pygame
