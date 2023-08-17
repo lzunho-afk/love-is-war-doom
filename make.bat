@@ -8,7 +8,7 @@ rem Ajustando o virtualenv do python conforme necessário
 if EXIST .venv\Scripts\activate.bat (
     .venv\Scripts\activate.bat
 ) else (
-    GOTO setupenv
+    CALL setupenv
 )
 
 rem Variáveis de uso global
@@ -34,7 +34,7 @@ python -m venv .venv
 .venv\Scripts\activate.bat
 python -m pip install -U pip
 python -m pip install -r requirements.txt
-GOTO end
+EXIT /B 0
 
 :help
 echo PAINEL DE AJUDA:
