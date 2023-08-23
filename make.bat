@@ -1,6 +1,6 @@
 @ECHO OFF
 
-rem Dev. Commandline - Loveiswar Engine (LIWE)
+rem Dev. Commandline - Loveiswar Engine (LIWE) 
 type LICENSE
 echo:
 

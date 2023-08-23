@@ -127,3 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#################
+## Esp. ignore ##
+#################
+
+## vim swap files
+*.swp

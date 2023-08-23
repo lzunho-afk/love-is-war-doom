@@ -1,9 +1,11 @@
 init:
-	pip install -r requirements.txt
+	source .venv/bin/activate
+	python -m pip install -U pip
+	python -m pip install -r requirements.txt
 
 sphinx-docs:
 	cd docs/ && \
-		sphinx-apidoc -o . .. && \
+		sphinx-apidoc -o . .. ../setup.py && \
 		$(MAKE) html
 
 clean-sphinx-docs:
