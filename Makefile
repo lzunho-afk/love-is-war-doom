@@ -5,7 +5,7 @@ init:
 
 sphinx-docs:
 	cd docs/ && \
-		sphinx-apidoc -o . .. ../setup.py && \
+		sphinx-apidoc -f -o . .. ../setup.py && \
 		$(MAKE) html
 
 clean-sphinx-docs:
