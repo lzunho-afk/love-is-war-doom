@@ -25,6 +25,12 @@ extensions = [
     'sphinx.ext.todo',
 ]
 
+# google docstring for napoleon
+napoleon_google_docstring = True
+
+# list constructor docstring separately from class docstring
+napoleon_include_init_with_doc = True
+
 # including todo items
 todo_include_todos = True
 
