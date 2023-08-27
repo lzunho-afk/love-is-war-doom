@@ -44,3 +44,11 @@ language = 'pt_BR'
 
 html_theme = 'alabaster'
 html_static_path = ['_static']
+
+html_theme_options = {
+    'github_user': 'lzunho-afk',
+    'github_repo': 'love-is-war',
+    'github_banner': 'true',
+    'github_button': 'true',
+    'github_type': 'star',
+}
