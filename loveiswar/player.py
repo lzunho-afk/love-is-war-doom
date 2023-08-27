@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 # Copyright (c) MIT
 # Lucas Zunho <lucaszunho17@gmail.com>
-import settings
+
 import pygame
 import math
+from loveiswar import settings
 
 class Player:
     """Controle de informações e eventos relacionados ao jogador.

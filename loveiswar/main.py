@@ -6,16 +6,17 @@
 Esse módulo apresenta a classe :py:class:`loveiswar.main.Game` e a sua inicialização
 no caso de ocorrer a execução do arquivo.
 """
+
 import pygame
 import sys
 from pygame.locals import *
 
-import settings
-import map
-import player
-import raycasting
-import object_renderer
-import sprite_object
+from loveiswar import settings
+from loveiswar import map
+from loveiswar import player
+from loveiswar import raycasting
+from loveiswar import object_renderer
+from loveiswar import sprite_object
 
 class Game:
     """Representação da montagem e atualização de todo o contexto do jogo.

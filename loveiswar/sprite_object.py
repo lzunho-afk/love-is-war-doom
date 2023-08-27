@@ -3,8 +3,9 @@
 # Lucas Zunho <lucaszunho17@gmail.com>
 
 import math
-import pygame 
-import settings
+import pygame
+
+from loveiswar import settings
 
 class SpriteObject:
     def __init__(self, game, path='assets/sprites/static/real_heart.png', pos=(10.5, 3.5), scale=0.5, shift=0.0):

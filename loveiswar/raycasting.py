@@ -4,7 +4,7 @@
 
 import pygame
 import math
-import settings
+from loveiswar import settings
 
 class RayCasting:
     """Implementação e projeção de raycasting no contexto do jogo.
