@@ -16,7 +16,7 @@ class ObjectRenderer:
     considerados "dinâmicos".
 
     Attributes:
-    	game (loveiswar.game.Game): Objeto `Game` do contexto em execução.
+    	game (loveiswar.main.Game): Objeto `Game` do contexto em execução.
         screen (pygame.Surface): Surface base do jogo, usada como estrutura
         	de controle do `display`.
         wallTextures (pygame.Surface list): Lista de texturas pré-carregas das paredes.
@@ -27,7 +27,7 @@ class ObjectRenderer:
         	das texturas base.
 
         Args:
-        	game (:obj:`loveiswar.game.Game`): Obj. `Game` em execução.
+        	game (loveiswar.main.Game): Obj. `Game` em execução.
         """
         self.game = game
         self.screen = game.screen
@@ -35,7 +35,7 @@ class ObjectRenderer:
 
         self.sky_image = self.get_texture('assets/textures/sky.png',
             (settings.WIDTH, settings.HALF_HEIGHT))
-        """Surface: Escalonagem da textura de céu para uso útil (1/2 da altura)."""
+        """pygame.Surface: Escalonagem da textura de céu para uso útil (1/2 da altura)."""
         
         self.sky_offset = 0
         
@@ -54,7 +54,7 @@ class ObjectRenderer:
         # Floor
         pygame.draw.rect(self.screen, settings.FLOOR_COLOR, 
                          (0, settings.HALF_HEIGHT, settings.WIDTH, settings.HEIGHT))
-        """:obj:`pygame.Rect`: renderização do chão do jogo com uma cor plana
+        """pygame.Rect: renderização do chão do jogo com uma cor plana
         	(:py:data:`loveiswar.settings.FLOOR_COLOR`). """
         
     def render_game_objects(self):
@@ -74,7 +74,7 @@ class ObjectRenderer:
         Args:
         	path (str): Caminho para a imagem da textura a ser carregada.
             res (int tuple): Tupla com a resolução 2d da textura (Default:
-            	:py:data:``loveiswar.settings.TEXTURA_TUPLE``).
+            	:py:data:`loveiswar.settings.TEXTURA_TUPLE`).
 
         Returns:
         	pygame.Surface: textura ajustada com a resolução correta.

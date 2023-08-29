@@ -25,7 +25,7 @@ class Player:
         :py:data:`loveiswar.settings.PLAYER_POS`.
         
         Args:
-        	game (:obj:`loveiswar.game.Game`): Obj. `Game` em execução.
+        	game (loveiswar.game.Game): Obj. `Game` em execução.
         """
         self.game = game
         self.x, self.y = settings.PLAYER_POS[0], settings.PLAYER_POS[1]

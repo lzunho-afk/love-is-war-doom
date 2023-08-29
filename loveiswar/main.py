@@ -4,7 +4,7 @@
 """Inicialização e representação do contexto do jogo.
 
 Esse módulo apresenta a classe :py:class:`loveiswar.main.Game` e a sua inicialização
-no caso de ocorrer a execução do arquivo.
+no caso de execução.
 """
 
 import pygame
@@ -27,14 +27,14 @@ class Game:
     pygame (o jogo em si).
 
     Attributes:
-    	screen (:obj:`pygame.Surface`): Estrutura de controle do `display` do pygame.
-        clock (:obj:`pygame.time.Clock`): Objeto utilizado para controle de tempo.
+    	screen (pygame.Surface): Estrutura de controle do `display` do pygame.
+        clock (pygame.time.Clock): Objeto utilizado para controle de tempo.
         dt (int): delta-time.
-        map (:obj:`loveiswar.map.Map`): Controle e desenho do mapa.
-        player (:obj:`loveiswar.player.Player`): Objeto de controle do `player`.
-        raycasting (:obj:`loveiswar.raycasting.RayCasting`): Objeto de controle
+        map (loveiswar.map.Map): Controle e desenho do mapa.
+        player (loveiswar.player.Player): Objeto de controle do `player`.
+        raycasting (loveiswar.raycasting.RayCasting): Objeto de controle
         	do sistema de raycasting.
-        static_sprite (:obj:`loveiswar.sprite_object.SpriteObject`): Objeto de
+        static_sprite (loveiswar.sprite_object.SpriteObject): Objeto de
         	controle e desenho de sprites.
         
     """
@@ -86,7 +86,8 @@ class Game:
         
         self.dt = self.clock.tick(settings.FPS)
         """int: Definição do `delta-time` (milissegundos) através do framerate
-        	anteriormente definido (limitação do tempo de execução)."""
+        	anteriormente definido (limitação do tempo de execução).
+        """
         
         pygame.display.set_caption(f'{self.clock.get_fps() :.1f}')
         

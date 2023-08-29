@@ -11,9 +11,9 @@ class RayCasting:
 
     Attributes:
     	game (loveiswar.main.Game): Objeto `Game` do contexto em execução.
-        rayCastingResult (list): Lista com os valores de escala e textura para renderização e
+        rayCastingResult (vector): Lista com os valores de escala e textura para renderização e
         	projeção das `rays`.
-        objectsToRender (list): Lista de obj. descrevendo as `rays` já prontas para renderização.
+        objectsToRender (vector): Lista de obj. descrevendo as `rays` já prontas para renderização.
         textures (pygame.Surface list): Lista das texturas de parede do jogo - refere-se à
         	:py:class:`loveiswar.main.Game`.
     """
@@ -22,7 +22,7 @@ class RayCasting:
         	para atribuição das `rays`.
 
         Args:
-        	game (:obj:`loveiswar.game.Game`): Obj. `Game` em execução.
+        	game (loveiswar.game.Game): Obj. `Game` em execução.
         """
         self.game = game
         self.ray_casting_result = []

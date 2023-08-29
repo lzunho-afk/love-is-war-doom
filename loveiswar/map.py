@@ -16,7 +16,7 @@ mini_map = [
     [1, _, _, 1, _, _, _, 1, _, _, _, _, _, _, _, 3],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3],
 ]
-"""lista de inteiros: Define o tamanho do mapa e a localização das texturas. 
+"""int list: Define o tamanho do mapa e a localização das texturas. 
 
     :meta hide-value:
 """
@@ -30,7 +30,7 @@ class Map:
     ao mapa do jogo pelo andamento da história do mesmo.
 
     Attributes:
-    	game (:obj:`loveiswar.main.Game`): Objeto `Game` do contexto em execução.
+    	game (loveiswar.main.Game): Objeto `Game` do contexto em execução.
         mini_map (int matrix):Representação do mapa e suas texturas.
         world_map (int list): Representação do mapa e suas texturas com um index
         	de tuplas para representar suas coordenadas.
@@ -40,7 +40,7 @@ class Map:
         	mapa alvo.
 
         Args:
-        	game (:obj:`loveiswar.game.Game`): Obj. `Game` em execução.
+        	game (loveiswar.main.Game): Obj. `Game` em execução.
         """
         self.game = game
         self.mini_map = mini_map
