@@ -11,8 +11,8 @@ import os
 sys.path.insert(0, os.path.abspath('..'))
 
 project = 'loveiswar'
-copyright = '2023, lzunho-afk'
-author = 'lzunho-afk'
+copyright = '2023, Lucas Zunho'
+author = 'Lucas Zunho'
 release = '02.08.2023'
 
 # -- General configuration ---------------------------------------------------
@@ -23,6 +23,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.napoleon',
     'sphinx.ext.todo',
+    'sphinx.ext.githubpages',
 ]
 
 # google docstring for napoleon
