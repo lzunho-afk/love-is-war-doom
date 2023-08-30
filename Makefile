@@ -1,7 +1,9 @@
+PY_INST=python -m pip install -U
+
 init:
-	source .venv/bin/activate
-	python -m pip install -U pip
-	python -m pip install -r requirements.txt
+	source .venv/bin/activate && \
+		$(PY_INST) pip && \
+		$(PY_INST) -r requirements.txt
 
 sphinx-docs:
 	cd docs/ && \
