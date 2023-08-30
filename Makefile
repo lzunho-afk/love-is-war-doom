@@ -1,13 +1,19 @@
 PY_INST=python -m pip install -U
 
-init:
-	source .venv/bin/activate && \
-		$(PY_INST) pip && \
-		$(PY_INST) -r requirements.txt
+release: init sphinx-docs
+	$(PY_INST) pyinstaller
+	pyinstaller loveiswar.py
+	cp -r ./docs/_build/ ./dist/loveiswar/docs/
+	cp -r ./loveiswar/ ./dist/loveiswar/src/
+	cp ./LICENSE ./README.rst ./dist/loveiswar/
 
-sphinx-docs:
+init:
+	$(PY_INST) pip
+	$(PY_INST) -r requirements.txt
+
+sphinx-docs: clean-sphinx-docs
 	cd docs/ && \
-		sphinx-apidoc -M -f -o . .. ../setup.py && \
+		sphinx-apidoc -MPfe -o . .. ../setup.py ../loveiswar.py && \
 		$(MAKE) html
 
 clean-sphinx-docs:
