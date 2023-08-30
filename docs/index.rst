@@ -7,7 +7,7 @@ Documentação Projeto LoveIsWar
 ==============================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :caption: Conteúdo:
 
    modules
