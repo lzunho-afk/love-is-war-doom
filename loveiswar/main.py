@@ -5,6 +5,8 @@
 
 Esse módulo apresenta a classe :py:class:`loveiswar.main.Game` e a sua inicialização
 no caso de execução.
+
+	.. todo:: Opção de linha de comando para alterar a visibilidade para modo 2D.
 """
 
 import pygame
@@ -42,9 +44,10 @@ class Game:
         """Inicialização do pygame e configurações básicas do contexto da janela.
 
         As definições de display feitas no construtor são orientadas pelo módulo
-        :py:mod:`loveiswar.settings` - configurações `RES` e `FULLSCREEN`. Todos
-        os outros objetos utilizados pela classe para controlar o contexto do jogo
-        também utilizam esse mesmo módulo para orientar suas definições.
+        :py:mod:`loveiswar.settings` - configurações :py:data:`loveiswar.settings.RES`
+        e :py:data:`loveiswar.settings.FULLSCREEN`. Todos os outros objetos
+        utilizados pela classe para controlar o contexto do jogo também utilizam
+        esse mesmo módulo para orientar suas definições.
         """
         pygame.init()
         pygame.mouse.set_visible(False)

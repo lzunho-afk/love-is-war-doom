@@ -22,7 +22,7 @@ class RayCasting:
         	para atribuição das `rays`.
 
         Args:
-        	game (loveiswar.game.Game): Obj. `Game` em execução.
+        	game (loveiswar.main.Game): Obj. `Game` em execução.
         """
         self.game = game
         self.ray_casting_result = []
@@ -32,7 +32,7 @@ class RayCasting:
     def get_objects_to_render(self):
         """Cria a lista de renderização de acordo com cada `ray` e sua respectiva textura.
 
-        O método verifica cada valor resultante do raycasting (:py:meth:`loveiswar.raycasting.Raycasting.rayCast`)
+        O método verifica cada valor resultante do raycasting (:py:meth:`loveiswar.raycasting.Raycasting.ray_cast`)
         e ajusta a escala da textura sobre cada `ray` para definir a perspectiva correta
         na tela, alocando-a na lista de renderização.
         """
@@ -156,6 +156,6 @@ class RayCasting:
             ray_angle += settings.DELTA_ANGLE
     
     def update(self):
-        """Cálcula e atualiza a lista de renderização do `raycasting`."""
+        """Calcula e atualiza a lista de renderização do `raycasting`."""
         self.ray_cast()
         self.get_objects_to_render()
