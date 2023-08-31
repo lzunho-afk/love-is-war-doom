@@ -5,6 +5,7 @@ release: init sphinx-docs
 	pyinstaller loveiswar.py
 	cp -r ./docs/_build/ ./dist/loveiswar/docs/
 	cp -r ./loveiswar/ ./dist/loveiswar/src/
+	cp -r ./assets/ ./dist/loveiswar/
 	cp ./LICENSE ./README.rst ./dist/loveiswar/
 
 init:
@@ -18,3 +19,6 @@ sphinx-docs: clean-sphinx-docs
 
 clean-sphinx-docs:
 	find docs -type f ! -name '[mM]ake*' ! -name 'index.rst' ! -name 'conf.py' ! -path "./docs/_static/*" ! -path "./docs/_templates/*" -delete
+
+clean-cache:
+	find loveiswar -type d -name '__pycache__' -exec rm -r "{}" \;
