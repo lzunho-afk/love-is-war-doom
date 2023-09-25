@@ -127,12 +127,23 @@ class AnimatedSpriteObject(SpriteObject):
         self.animation_trigger = False
 
     def update(self):
+        """Chamada dos métodos necessários para a atualização da animação em cada frame.
+        
+        Esse método chama o método de atualização da classe mãe `loveiswar.sprite_object.SpriteObject`,
+        que carrega sprites estáticos, e também chama o método de verificação do tempo conforme os
+        sprites da animação (sincronização sobre tickrate) e a verificação de trigger.
+        """
         super().update()
         self.check_animation_time()
         self.animate(self.images)
         
     def animate(self, images):
-        """"""
+        """Reorganiza a estrutura de imagens conforme para startar a animação.
+        
+        Args:
+            images (pygame.Surface list): Lista de imagens carregadas no construtor para
+                a animação.
+        """
         if self.animation_trigger:
             images.rotate(-1)
             self.image = images[0]
