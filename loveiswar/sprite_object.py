@@ -118,7 +118,36 @@ class SpriteObject:
         self.get_sprite()
 
 class AnimatedSpriteObject(SpriteObject):
+    """Objeto de animações e carregamento de seus respectivos conjuntos de dados.
+    
+    Esse objeto apresenta métodos de carregamento e parsing dos dados de imagens (spritesheets)
+    em estruturas requeridas para manutenção da animação. Também, com métodos de verificação constante
+    do tempo de animação pré definido com o tickrate do jogo, esse objeto define o estado atual
+    da animação para sua renderização correta.
+
+    Attributes:
+        animation_time (int): Tempo de animação em milisegundos.
+        path (str): Caminho da pasta que contém os sprites da animação.
+        images (pygame.Surface list): Sprites da animação já manipuladas para o jogo.
+        animation_time_prev (int): Tempo passado desde a inicialização do pygame até essa chamada, 
+            esse atributo é utilizado como referência para a substituição das imagens (ele é atualizado
+            a cada substituição).
+        animation_trigger (bool): Booleano para definir se a estrutura de imagens deve ser atualizada, 
+            substituindo a imagem atual da animação pela sucessora.
+    """
     def __init__(self, game, path, pos, shift, scale=1.0, animation_time=120):
+        """Chamada do construtor da classe mãe e carregamento das imagens da animação.
+        
+        A chamada do construtor da classe `loveiswar.sprite_object.SpriteObject` ocorre para as
+        definições iniciais de sprite, assim bastando atualizar esse objeto para criar a animação.
+
+        Args:
+            game (loveiswar.main.Game): Obj. `Game` em execução.
+            path (str): Caminho da pasta dos sprites da animação.
+            pos (float tuple): Posição de exibição da animação no mapa do jogo.
+            scale (float): Escala de exibição dos sprites da animação.
+            shift (float): Valor de deslocamento dos sprites na linha vertical.
+        """
         super().__init__(game, path, pos, scale, shift)
         self.animation_time = animation_time
         self.path = path.rsplit('/', 1)[0]
@@ -138,7 +167,7 @@ class AnimatedSpriteObject(SpriteObject):
         self.animate(self.images)
         
     def animate(self, images):
-        """Reorganiza a estrutura de imagens conforme para startar a animação.
+        """Reorganiza a estrutura de imagens conforme a animação.
         
         Args:
             images (pygame.Surface list): Lista de imagens carregadas no construtor para
