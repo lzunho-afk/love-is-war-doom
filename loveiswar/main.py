@@ -74,7 +74,7 @@ class Game:
         self.player = player.Player(self)
         self.object_renderer = object_renderer.ObjectRenderer(self)
         self.raycasting = raycasting.RayCasting(self)
-        self.static_sprite = sprite_object.SpriteObject(self)
+        self.static_sprite = sprite_object.SpriteObject(self, path='assets/sprites/static/real_heart.png', pos=(10.5, 3.5), scale=0.5)
     
     def update(self):
         """Realiza a atualização plana de todos os objetos fundamentais.

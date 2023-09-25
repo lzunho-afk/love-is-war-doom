@@ -4,6 +4,8 @@
 
 import math
 import pygame
+import os
+from collections import deque
 
 from loveiswar import settings
 
@@ -30,7 +32,7 @@ class SpriteObject:
         SPRITE_SCALE (float): Valor de escala de exibição do sprite.
         SPRITE_HEIGHT_SHIFT (float): Valor de deslocamento do sprite na vertical.
     """
-    def __init__(self, game, path='assets/sprites/static/real_heart.png', pos=(10.5, 3.5), scale=0.5, shift=0.0):
+    def __init__(self, game, path, pos, scale=1.0, shift=0.0):
         """Inicializa os atributos e define o contexto inicial do sprite.
 
         Esse construtor, além de definir os valor padrões através dos argumentos
@@ -114,3 +116,58 @@ class SpriteObject:
         atualização dos atributos.
         """
         self.get_sprite()
+
+class AnimatedSpriteObject(SpriteObject):
+    def __init__(self, game, path, pos, scale=1.0, shift, animation_time=120):
+        super().__init__(game, path, pos, scale, shift)
+        self.animation_time = animation_time
+        self.path = path.rsplit('/', 1)[0]
+        self.images = self.get_images(self.path)
+        self.animation_time_prev = pg.time.get_ticks()
+        self.animation_trigger = False
+
+    def update(self):
+        super().update()
+        self.check_animation_time()
+        self.animate(self.images)
+        
+    def animate(self, images):
+        """"""
+        if self.animation_trigger:
+            images.rotate(-1)
+            self.image = images[0]
+        
+    def check_animation_time(self):
+        """Verifica o tempo de animação conforme o tick do jogo.
+
+        Aqui a variável `animation_trigger` é alterada com base na
+        verificação do tempo já passado em relação ao tempo de animação
+        pre estabelecido para o objeto de animação.
+        """
+        self.animation_trigger = False
+        time_now = pg.time.get_ticks()
+        if time_now - self.animation_time_prev > self.animation_time:
+            self.animation_time_prev = time_now
+            self.animation_trigger = True
+
+    @staticmethod
+    def get_images(path):
+        """Converte e adiciona todas as imagens do diretório em uma lista.
+
+        Todos os arquivos de imagem no diretório são convertidos para um formato
+        próprio para a engine, incluindo `per pixel alpha`, para melhor performance.
+        Esses dados de imagem são adicionados a uma estrutura de dados lista (deque).
+
+        Args:
+        	path (str): Diretório de imagens a carregar.
+
+        Returns:
+        	imgs (pygame.Surface list): Lista das imagens já convertidas para
+            	formato de convenção do pygame.
+        """
+        images = deque()
+        for filename in os.listdir(path):
+            if os.path.isfile(os.path.join(path, filename)):
+                img = pg.image.load(path + '/' + filename).convert_alpha()
+                images.append(img)
+        return images
