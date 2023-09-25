@@ -118,12 +118,12 @@ class SpriteObject:
         self.get_sprite()
 
 class AnimatedSpriteObject(SpriteObject):
-    def __init__(self, game, path, pos, scale=1.0, shift, animation_time=120):
+    def __init__(self, game, path, pos, shift, scale=1.0, animation_time=120):
         super().__init__(game, path, pos, scale, shift)
         self.animation_time = animation_time
         self.path = path.rsplit('/', 1)[0]
         self.images = self.get_images(self.path)
-        self.animation_time_prev = pg.time.get_ticks()
+        self.animation_time_prev = pygame.time.get_ticks()
         self.animation_trigger = False
 
     def update(self):
@@ -145,7 +145,7 @@ class AnimatedSpriteObject(SpriteObject):
         pre estabelecido para o objeto de animação.
         """
         self.animation_trigger = False
-        time_now = pg.time.get_ticks()
+        time_now = pygame.time.get_ticks()
         if time_now - self.animation_time_prev > self.animation_time:
             self.animation_time_prev = time_now
             self.animation_trigger = True
@@ -168,6 +168,6 @@ class AnimatedSpriteObject(SpriteObject):
         images = deque()
         for filename in os.listdir(path):
             if os.path.isfile(os.path.join(path, filename)):
-                img = pg.image.load(path + '/' + filename).convert_alpha()
+                img = pygame.image.load(path + '/' + filename).convert_alpha()
                 images.append(img)
         return images
