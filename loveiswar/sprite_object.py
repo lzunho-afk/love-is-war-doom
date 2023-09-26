@@ -223,7 +223,7 @@ class SpriteSheet:
     Attributes:
         filepath (str): Caminho do arquivo de imagem `SpriteSheet`.
     """
-    def __init__(self, filepath):
+    def __init__(self, filepath, sprites_res):
         """Carregamento do `SpriteSheet` e definições básicas de tratamento.
         
         Args:
@@ -231,6 +231,8 @@ class SpriteSheet:
         """
         self.filepath = filepath
         self.sheet = self.load_sheet(self.filepath)
+        self.sheet_res = self.sheet.get_size()
+        self.sprites_res = sprites_res
 
     @staticmethod
     def load_sheet(filepath):
@@ -270,3 +272,19 @@ class SpriteSheet:
                 color_key = image.get_at((0, 0))
             image.set_colorkey(color_key, pygame.RLEACCEL)
         return image
+
+    @staticmethod
+    def get_images_from(filepath, rects, color_key=None):
+        """Carrega várias imagens de um `SpriteSheet` e as retorna.
+        
+        Args:
+            filepath (str): Caminho do `SpriteSheet`.
+            rects (2 dim. int tuple): Lista de coordenadas de retirada dos sprites.
+            color_key (float tuple): Cor de composição das imagens após carregamento.
+        Returns:
+            images (pygame.Surface list): Lista de imagens recortadas conforme as coordenadas.
+        """
+        images = list()
+        for rect in rects:
+            images.append(SpriteSheet.get_image_from(filepath, rect, color_key))
+        return images
