@@ -202,7 +202,7 @@ class AnimatedSpriteObject(SpriteObject):
         	path (str): Diretório de imagens a carregar.
 
         Returns:
-        	imgs (pygame.Surface list): Lista das imagens já convertidas para
+        	images (pygame.Surface list): Lista das imagens já convertidas para
             	formato de convenção do pygame.
         """
         images = deque()
@@ -211,3 +211,62 @@ class AnimatedSpriteObject(SpriteObject):
                 img = pygame.image.load(path + '/' + filename).convert_alpha()
                 images.append(img)
         return images
+
+class SpriteSheet:
+    """Manuseio e definições básicas sobre `SpriteSheets`.
+    
+    Com a declaração desse objeto, é possível realizar diversas alterações e gerenciar
+    de maneira simplificada os `SpriteSheets` do jogo. Cada `SpriteSheet` pode ser carregado
+    conforme necessário, com uma configuração pré difinida em arquivo de metadado ou através
+    dos argumento postos na construção do obj. e/ou nos métodos estáticos de carregamento.
+
+    Attributes:
+        filepath (str): Caminho do arquivo de imagem `SpriteSheet`.
+    """
+    def __init__(self, filepath):
+        """Carregamento do `SpriteSheet` e definições básicas de tratamento.
+        
+        Args:
+            filepath (str): Caminho do arquivo `SpriteSheet`.
+        """
+        self.filepath = filepath
+        self.sheet = self.load_sheet(self.filepath)
+
+    @staticmethod
+    def load_sheet(filepath):
+        """Carrega toda a imagem do `SpriteSheet` e a retorna.
+
+        Args:
+            filepath (str): Caminho do `SpriteSheet`.
+        Returns:
+            sprite_sheet (pygame.Surface): Imagem de todo o `SpriteSheet`
+        """
+        sprite_sheet = None
+        try:
+            sprite_sheet = pygame.image.load(filepath).convert()
+        except pygame.error as e:
+            print(f"Não foi possível carregar o 'SpriteSheet' {filepath}.")
+            raise SystemExit(e)
+        return sprite_sheet
+
+    @staticmethod
+    def get_image_from(filepath, rect, color_key=None):
+        """Carrega uma imagem específica de um `SpriteSheet` e a retorna.
+        
+        Args:
+            filepath (str): Caminho do `SpriteSheet`.
+            rect (int tuple): Lista de 4 números inteiros de representação das coordenadas
+                de retirada do sprite no `SpriteSheet`.
+            color_key (float tuple): Cor de composição da imagem após carregamento.
+        Returns:
+            image (pygame.Surface): Imagem recortada conforme as coordenadas.
+        """
+        sheet = SpriteSheet.load_sheet(filepath)
+        rect = pygame.Rect(rect)
+        image = pygame.Surface(rect.size).convert()
+        image.blit(sheet, (0, 0), rect)
+        if color_key is not None:
+            if color_key == -1:
+                color_key = image.get_at((0, 0))
+            image.set_colorkey(color_key, pygame.RLEACCEL)
+        return image
