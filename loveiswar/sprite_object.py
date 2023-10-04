@@ -222,8 +222,9 @@ class SpriteSheet:
 
     Attributes:
         filepath (str): Caminho do arquivo de imagem `SpriteSheet`.
+
     """
-    def __init__(self, filepath, sprites_res):
+    def __init__(self, filepath, sprites_res=(256,256), color_key=None):
         """Carregamento do `SpriteSheet` e definições básicas de tratamento.
         
         Args:
@@ -231,8 +232,25 @@ class SpriteSheet:
         """
         self.filepath = filepath
         self.sheet = self.load_sheet(self.filepath)
-        self.sheet_res = self.sheet.get_size()
         self.sprites_res = sprites_res
+        self.color_key = color_key
+
+    def load_sprites(self):
+        """Carrega e armazena todas imagens de sprites do `SpriteSheet`."""
+        self.images = deque()
+        for height_c in range(self.sheet.get_height()//self.sprites_res[1]):
+            for width_c in range(self.sheet.get_width()//self.sprites_res[0]):
+                rect = pygame.Rect(
+                    (width_c*self.sprites_res[0], height_c*self.sprites_res[1]), 
+                    (self.sprites_res[0], self.sprites_res[1])
+                )
+                image = pygame.Surface(rect.size).convert()
+                image.blit(self.sheet, (0, 0), rect)
+                if self.color_key is not None:
+                    if self.color_key == -1:
+                        self.color_key = image.get_at((0,0))
+                    image.set_colorkey(self.color_key, pygame.RLEACCEL)
+                self.images.append(image)
 
     @staticmethod
     def load_sheet(filepath):
@@ -284,7 +302,7 @@ class SpriteSheet:
         Returns:
             images (pygame.Surface list): Lista de imagens recortadas conforme as coordenadas.
         """
-        images = list()
+        images = deque()
         for rect in rects:
-            images.append(SpriteSheet.get_image_from(filepath, rect, color_key))
+            images.append(SpriteSheet.get_image_from(filepath, rect, color_key).convert_alpha())
         return images
