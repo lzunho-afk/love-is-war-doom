@@ -21,8 +21,8 @@ batch "make.bat" (para usuário de windows) ou o próprio sphinx (suporte
 múltiplo).
 
 * Para compilar com o make, utilize o comando ``make sphinx-docs``
-* Com o script batch, execute-o da seguinte forma ``make.bat ndocs``
-* Com o sphinx, utilizamos o **sphinx-apidoc** dentro do diretório *docs* e executamos o **sphinx-build** da seguinte forma:
+* Com o script batch, execute-o da seguinte forma ``make.bat bdocs``
+* Com o sphinx, utilizamos o **sphinx-apidoc** dentro do diretório *docs* e executamos o **sphinx-build**, da seguinte forma:
 
   .. code-block:: bash
 
