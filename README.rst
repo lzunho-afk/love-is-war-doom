@@ -6,6 +6,12 @@ sendo uma opção ótima para construção de um verdadeiro passatempo para todo
 casais de plantão! Aqui, é possível ter todas as armas necessárias para a vitória
 nessa grande guerra do amor-*cof-cof*.
 
+Esse repositório armazena o código e metadados da versão da engine para construção
+de jogos no estilo *doom*. Para acessar a versão principal (engine de jogos 2D),
+acesse o `repositório principal`_.
+
+.. _repositório principal: https://github.com/lzunho-afk/love-is-war
+
 Para acessar a documentação do código e os textos de desenvolvimento,
 por favor acesse o `pages do projeto`_. Como alternativa, é possível realizar
 a compilação da documentação com o sphinx de maneira manual, processo explicado
